@@ -1,0 +1,364 @@
+[
+    {
+        "id": "54e41d0ea63578a0",
+        "type": "tab",
+        "label": "190388D_session2_ex01",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "85dca781fb7e3252",
+        "type": "ui_button",
+        "z": "54e41d0ea63578a0",
+        "name": "",
+        "group": "4929d7aa691298d4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "RESET",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Reset button pressed",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 100,
+        "y": 320,
+        "wires": [
+            [
+                "382c72c0f927a195",
+                "d0cb1e7b886170fa",
+                "5e6be8e3197652c3",
+                "55c0d0fe1cb10bdc",
+                "3b58671b8289cc4c"
+            ]
+        ]
+    },
+    {
+        "id": "382c72c0f927a195",
+        "type": "ui_toast",
+        "z": "54e41d0ea63578a0",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": true,
+        "className": "",
+        "topic": "",
+        "name": "Reset Msg",
+        "x": 330,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "653e18c1e7ba6377",
+        "type": "ui_button",
+        "z": "54e41d0ea63578a0",
+        "name": "CLEAR",
+        "group": "d0130d6de6b0073a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Clear",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 700,
+        "y": 140,
+        "wires": [
+            [
+                "fc4444d6e2fb8171"
+            ]
+        ]
+    },
+    {
+        "id": "fc4444d6e2fb8171",
+        "type": "ui_chart",
+        "z": "54e41d0ea63578a0",
+        "name": "",
+        "group": "d0130d6de6b0073a",
+        "order": 5,
+        "width": "6",
+        "height": "6",
+        "label": "chart",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "5",
+        "removeOlderPoints": "10",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 770,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a4dc004246437e8",
+        "type": "ui_gauge",
+        "z": "54e41d0ea63578a0",
+        "name": "",
+        "group": "5173ee40ec0681f1",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{payload.value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 550,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "950bacbcfd448a9c",
+        "type": "ui_slider",
+        "z": "54e41d0ea63578a0",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "5173ee40ec0681f1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "4a4dc004246437e8",
+                "fc4444d6e2fb8171"
+            ]
+        ]
+    },
+    {
+        "id": "3a0b1bf2005ff163",
+        "type": "ui_button",
+        "z": "54e41d0ea63578a0",
+        "name": "",
+        "group": "cd4cf64b2c79e9de",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Greetings!",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Hello World!",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 330,
+        "y": 40,
+        "wires": [
+            [
+                "5cf2c1666dc503f7"
+            ]
+        ]
+    },
+    {
+        "id": "5cf2c1666dc503f7",
+        "type": "ui_text",
+        "z": "54e41d0ea63578a0",
+        "group": "cd4cf64b2c79e9de",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Message:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 560,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "d0cb1e7b886170fa",
+        "type": "function",
+        "z": "54e41d0ea63578a0",
+        "name": "reset_func",
+        "func": "msg.payload = \" \";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "5cf2c1666dc503f7"
+            ]
+        ]
+    },
+    {
+        "id": "5e6be8e3197652c3",
+        "type": "function",
+        "z": "54e41d0ea63578a0",
+        "name": "reset_func",
+        "func": "msg.payload.value = 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "4a4dc004246437e8"
+            ]
+        ]
+    },
+    {
+        "id": "55c0d0fe1cb10bdc",
+        "type": "function",
+        "z": "54e41d0ea63578a0",
+        "name": "reset_func",
+        "func": "msg.payload = 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "950bacbcfd448a9c"
+            ]
+        ]
+    },
+    {
+        "id": "3b58671b8289cc4c",
+        "type": "ui_audio",
+        "z": "54e41d0ea63578a0",
+        "name": "",
+        "group": "4929d7aa691298d4",
+        "voice": "Microsoft Zira - English (United States)",
+        "always": true,
+        "x": 320,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4929d7aa691298d4",
+        "type": "ui_group",
+        "name": "Reset All",
+        "tab": "b7ee828e1337dc59",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d0130d6de6b0073a",
+        "type": "ui_group",
+        "name": "CHART",
+        "tab": "47ce2c341b49191b",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5173ee40ec0681f1",
+        "type": "ui_group",
+        "name": "Slider",
+        "tab": "b7ee828e1337dc59",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cd4cf64b2c79e9de",
+        "type": "ui_group",
+        "name": "Button",
+        "tab": "b7ee828e1337dc59",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b7ee828e1337dc59",
+        "type": "ui_tab",
+        "name": "Tab1",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "47ce2c341b49191b",
+        "type": "ui_tab",
+        "name": "Tab2",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

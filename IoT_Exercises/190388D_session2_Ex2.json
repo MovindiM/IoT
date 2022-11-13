@@ -1,0 +1,474 @@
+[
+    {
+        "id": "5ccacc2881ae9ef5",
+        "type": "tab",
+        "label": "190388D_session2_Ex2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bfd6785ba2b4230b",
+        "type": "ui_gauge",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "group": "5173ee40ec0681f1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{payload.value}}",
+        "min": "15",
+        "max": "45",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1050,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "301f63566a67f4b7",
+        "type": "ui_button",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "group": "4929d7aa691298d4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "RESET",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Reset button pressed",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 440,
+        "y": 420,
+        "wires": [
+            [
+                "ac3cf1c62a6f6c18",
+                "34e87eba4ab71a3d",
+                "6646d5e2a63ba993"
+            ]
+        ]
+    },
+    {
+        "id": "ac3cf1c62a6f6c18",
+        "type": "ui_audio",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "group": "4929d7aa691298d4",
+        "voice": "Microsoft Zira - English (United States)",
+        "always": true,
+        "x": 680,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "34e87eba4ab71a3d",
+        "type": "ui_toast",
+        "z": "5ccacc2881ae9ef5",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": true,
+        "className": "",
+        "topic": "",
+        "name": "Reset Msg",
+        "x": 690,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6646d5e2a63ba993",
+        "type": "function",
+        "z": "5ccacc2881ae9ef5",
+        "name": "reset_func",
+        "func": "let text;\nmsg.payload.weather = \" \";\nmsg.payload.humidity = \" \";\nmsg.payload.tempc = \" \";\nmsg.payload.value = 15;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 460,
+        "wires": [
+            [
+                "bfd6785ba2b4230b",
+                "aa02781a41fea2c9",
+                "e3f47f6c5021d72a",
+                "670ae81bfbc681ee"
+            ]
+        ]
+    },
+    {
+        "id": "03e662d235a4dc65",
+        "type": "ui_dropdown",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "cd4cf64b2c79e9de",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "Kalutara",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Galle",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Jaffna",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Anuradhapura",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Matara",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "b49d0b1ca683ee16",
+                "27622550c69c9eba"
+            ]
+        ]
+    },
+    {
+        "id": "8dae0ac671d44008",
+        "type": "openweathermap",
+        "z": "5ccacc2881ae9ef5",
+        "name": "openweather",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "",
+        "country": "",
+        "language": "en",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "aa02781a41fea2c9",
+                "e3f47f6c5021d72a",
+                "1c69fbbb90200cd4",
+                "670ae81bfbc681ee",
+                "7d7ad6fb693a6053",
+                "5f6d1ee19edf80bc"
+            ]
+        ]
+    },
+    {
+        "id": "aa02781a41fea2c9",
+        "type": "ui_text",
+        "z": "5ccacc2881ae9ef5",
+        "group": "cd4cf64b2c79e9de",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Weather",
+        "label": "Weather:",
+        "format": "{{msg.payload.weather}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 900,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e3f47f6c5021d72a",
+        "type": "ui_text",
+        "z": "5ccacc2881ae9ef5",
+        "group": "cd4cf64b2c79e9de",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Humidity",
+        "label": "Humidity:",
+        "format": "{{msg.payload.humidity}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 900,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "670ae81bfbc681ee",
+        "type": "ui_text",
+        "z": "5ccacc2881ae9ef5",
+        "group": "cd4cf64b2c79e9de",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Temprature",
+        "label": "Temprature:",
+        "format": "{{msg.payload.tempc}} C",
+        "layout": "row-spread",
+        "className": "",
+        "x": 910,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b49d0b1ca683ee16",
+        "type": "debug",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1c69fbbb90200cd4",
+        "type": "debug",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "27622550c69c9eba",
+        "type": "function",
+        "z": "5ccacc2881ae9ef5",
+        "name": "get_city&country",
+        "func": "let city = msg.payload;\n\nmsg.location = {};\nmsg.location.city=city;\nmsg.location.country=\"Sri Lanka\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "8dae0ac671d44008"
+            ]
+        ]
+    },
+    {
+        "id": "7d7ad6fb693a6053",
+        "type": "function",
+        "z": "5ccacc2881ae9ef5",
+        "name": "get_value",
+        "func": "msg.payload.value = msg.payload.tempc;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 420,
+        "wires": [
+            [
+                "bfd6785ba2b4230b"
+            ]
+        ]
+    },
+    {
+        "id": "519af965b878ad93",
+        "type": "ui_chart",
+        "z": "5ccacc2881ae9ef5",
+        "name": "",
+        "group": "d0130d6de6b0073a",
+        "order": 5,
+        "width": "6",
+        "height": "6",
+        "label": "chart",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "10",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1230,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5f6d1ee19edf80bc",
+        "type": "function",
+        "z": "5ccacc2881ae9ef5",
+        "name": "get_tempc",
+        "func": "msg.payload = msg.payload.tempc;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 360,
+        "wires": [
+            [
+                "519af965b878ad93"
+            ]
+        ]
+    },
+    {
+        "id": "15adee6be09d051d",
+        "type": "ui_button",
+        "z": "5ccacc2881ae9ef5",
+        "name": "CLEAR",
+        "group": "d0130d6de6b0073a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Clear",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1060,
+        "y": 180,
+        "wires": [
+            [
+                "519af965b878ad93"
+            ]
+        ]
+    },
+    {
+        "id": "5173ee40ec0681f1",
+        "type": "ui_group",
+        "name": "Slider",
+        "tab": "b7ee828e1337dc59",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4929d7aa691298d4",
+        "type": "ui_group",
+        "name": "Reset All",
+        "tab": "b7ee828e1337dc59",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cd4cf64b2c79e9de",
+        "type": "ui_group",
+        "name": "Button",
+        "tab": "b7ee828e1337dc59",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d0130d6de6b0073a",
+        "type": "ui_group",
+        "name": "CHART",
+        "tab": "47ce2c341b49191b",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b7ee828e1337dc59",
+        "type": "ui_tab",
+        "name": "Tab1",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "47ce2c341b49191b",
+        "type": "ui_tab",
+        "name": "Tab2",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

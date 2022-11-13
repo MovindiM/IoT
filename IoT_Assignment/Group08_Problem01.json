@@ -1,0 +1,184 @@
+[
+    {
+        "id": "37f9002766eb731f",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b4e3bf1c195791c4",
+        "type": "e-mail in",
+        "z": "37f9002766eb731f",
+        "name": "DummyNode Gmail",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "autotls": "never",
+        "port": "993",
+        "box": "INBOX",
+        "disposition": "Read",
+        "criteria": "UNSEEN",
+        "repeat": "10",
+        "fetch": "auto",
+        "inputs": 0,
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "b7f0b585452c332a"
+            ]
+        ]
+    },
+    {
+        "id": "3eeed35c7a4ab1ff",
+        "type": "comment",
+        "z": "37f9002766eb731f",
+        "name": "Location critera",
+        "info": "Country\nCity\n\n\ngmail:- dummynode007@gmail.com\npassword:- @IoTNodeRed19",
+        "x": 140,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b7f0b585452c332a",
+        "type": "function",
+        "z": "37f9002766eb731f",
+        "name": "",
+        "func": "msg.location={};\nmsg.noerror={};\nlet body=msg.payload;\nlet result = body.split(/\\r?\\n/).filter(element => element);\nconst choice_emails=[\"nuwanudara36@gmail.com\",\"nudara73@gmail.com\",\"movindim@gmail.com\"];\nif (choice_emails.includes(msg.from)){\n    if (result.length==2){\n        msg.location.country=result[0];\n        msg.location.city=result[1];\n        msg.noerror=1;\n        \n    }\n    else{\nmsg.noerror=0;\nmsg.payload=\"Sorry, check the input. you need to Give the data in 2 lines, with country and city\";\n}\n    \n}\nelse{\n    msg.payload=\"Sorry,you do not have permission. your Email is not valid\";\n    msg.noerror=0;\n    \n}\nmsg.to={};\nmsg.to=msg.from;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 300,
+        "wires": [
+            [
+                "471a72f1d44eee9f"
+            ]
+        ]
+    },
+    {
+        "id": "c9abc3bc05f5db13",
+        "type": "openweathermap",
+        "z": "37f9002766eb731f",
+        "name": "",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "",
+        "country": "",
+        "language": "en",
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "d5f35b489a8cd942"
+            ]
+        ]
+    },
+    {
+        "id": "471a72f1d44eee9f",
+        "type": "switch",
+        "z": "37f9002766eb731f",
+        "name": "error split",
+        "property": "noerror",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "c9abc3bc05f5db13"
+            ],
+            [
+                "dd2410aaf101e632"
+            ]
+        ]
+    },
+    {
+        "id": "dd2410aaf101e632",
+        "type": "e-mail",
+        "z": "37f9002766eb731f",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 970,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d5f35b489a8cd942",
+        "type": "function",
+        "z": "37f9002766eb731f",
+        "name": "",
+        "func": "\n// {\"id\":802,\n// \"weather\":\"Clouds\",\n// \"detail\":\"scattered clouds\",\n// \"icon\":\"03n\",\n// \"tempk\":299.32,\n// \"tempc\":26.1,\n// \"temp_maxc\":26.1,\n// \"temp_minc\":26.1,\n// \"humidity\":71,\n// \"pressure\":1012,\n// \"maxtemp\":299.32,\n// \"mintemp\":299.32,\n// \"windspeed\":5.78,\n// \"winddirection\":50,\n// \"location\":\"Jaffna\",\n// \"sunrise\":1646096066,\n// \"sunset\":1646139042,\n// \"clouds\":26,\n// \"description\":\"The weather in Jaffna at coordinates: 9.6685, 80.0074 is Clouds (scattered clouds).}\nmsg.payload=\"City:- \"+ msg.payload.location +\"\\n\"+ \"Weather:- \"+ msg.payload.weather+\"\\n\"+\"Temparature:- \"+msg.payload.tempc+\"C\"+\"\\n\"+ \"Max Temparatre:- \"+msg.payload.temp_maxc +\"C \\n\"+\"Pressure:- \"+msg.payload.pressure+\"hPa\"+\"\\n\"+\"Min Temparatre:- \"+msg.payload.temp_minc +\"C \\n\"+ \"Humidity:- \"+msg.payload.humidity +\"% \\n\"+\"Wind Speed:- \"+ msg.payload.windspeed+\"KMpH\"+\"\\n\"+\"Wind Direction:- \"+msg.payload.winddirection+\"\\n\"+ \"Description:- \"+msg.payload.description +\"\\n\";\n\nmsg.topic=\"Your Wheather data\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "dd2410aaf101e632"
+            ]
+        ]
+    },
+    {
+        "id": "485e04266891e006",
+        "type": "catch",
+        "z": "37f9002766eb731f",
+        "name": "",
+        "scope": [
+            "c9abc3bc05f5db13"
+        ],
+        "uncaught": false,
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "7d39f998ba495f25"
+            ]
+        ]
+    },
+    {
+        "id": "7d39f998ba495f25",
+        "type": "function",
+        "z": "37f9002766eb731f",
+        "name": "",
+        "func": "msg.payload=\"Invalid City or location, check your inputs again\";\nmsg.topic=\"Location Error\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 500,
+        "wires": [
+            [
+                "dd2410aaf101e632"
+            ]
+        ]
+    }
+]

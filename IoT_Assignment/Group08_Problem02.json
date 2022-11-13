@@ -1,0 +1,355 @@
+[
+    {
+        "id": "d67214bc3552e114",
+        "type": "tab",
+        "label": "Flow 8",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e52841c7ba7bdd72",
+        "type": "change",
+        "z": "d67214bc3552e114",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"8\":[\"EE2023/BM2800\",\"Electrical Machines and Drives I / Introduction to Biomedical Engineering\"],\"9\":[\"EE2023/BM2800\",\"Electrical Machines and Drives I / Introduction to Biomedical Engineering\"],\"10\":[\"EN2073\",\"Analog and Digital Communication\"],\"11\":[\"EN2073\",\"Analog and Digital Communication\"],\"12\":[\"Interval\",\"Lunch Break\"],\"13\":[\"MA2053\",\"Graph Theory\"],\"14\":[\"MA2053\",\"Graph Theory\"],\"15\":[\"EN2570(P)\",\"Digital Signal Processing\"],\"16\":[\"EN2570(P)\",\"Digital Signal Processing\"],\"17\":[\"EN2570(P)\",\"Digital Signal Processing\"],\"day\":\"Monday\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "5a5fbfebddfbe7ea"
+            ]
+        ]
+    },
+    {
+        "id": "5a5fbfebddfbe7ea",
+        "type": "function",
+        "z": "d67214bc3552e114",
+        "name": "Module Identifier",
+        "func": "//const myObj = JSON.parse(msg.payload);\n\nlet x = msg.hour;\n\n//let y = x.toString();\n\nmsg.topic= msg.payload[x];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 360,
+        "wires": [
+            [
+                "2031909dc752b7dc",
+                "2b2e014dda3a0d2d",
+                "6733d95c64aa82a2"
+            ]
+        ]
+    },
+    {
+        "id": "2031909dc752b7dc",
+        "type": "ui_text",
+        "z": "d67214bc3552e114",
+        "group": "eea871b3c2605877",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Subject Code",
+        "format": "{{msg.topic[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1040,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "8e24122895edb3e6",
+        "type": "ui_numeric",
+        "z": "d67214bc3552e114",
+        "name": "",
+        "label": "Hour",
+        "tooltip": "",
+        "group": "eea871b3c2605877",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "wrap": true,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value }}:15",
+        "min": "08",
+        "max": "17",
+        "step": 1,
+        "className": "",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "b374cf05688bd96f"
+            ]
+        ]
+    },
+    {
+        "id": "2b2e014dda3a0d2d",
+        "type": "ui_text",
+        "z": "d67214bc3552e114",
+        "group": "eea871b3c2605877",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Day",
+        "format": "{{msg.payload.day}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 990,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6733d95c64aa82a2",
+        "type": "ui_text",
+        "z": "d67214bc3552e114",
+        "group": "eea871b3c2605877",
+        "order": 6,
+        "width": "6",
+        "height": "3",
+        "name": "",
+        "label": "Subject Name",
+        "format": "{{msg.topic[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1040,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b374cf05688bd96f",
+        "type": "change",
+        "z": "d67214bc3552e114",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "hour",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "e52841c7ba7bdd72"
+            ]
+        ]
+    },
+    {
+        "id": "34ba060d7a657e2d",
+        "type": "inject",
+        "z": "d67214bc3552e114",
+        "name": "Time injector",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "dcf84e07a0221152"
+            ]
+        ]
+    },
+    {
+        "id": "dcf84e07a0221152",
+        "type": "function",
+        "z": "d67214bc3552e114",
+        "name": "Time extract",
+        "func": "//if ( !msg.timestamp ) msg.timestamp = Math.round(+new Date());\n\nvar dt = new Date(msg.payload);\nvar msg = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hours':\tdt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'secs':     dt.getSeconds(),\n\t'msecs':\tdt.getMilliseconds(),\n\t'hm':  (\"0\" + dt.getHours()).slice(-2) + \":\" + (\"0\" + dt.getMinutes()).slice(-2) + \":\" + (\"0\" + dt.getSeconds()).slice(-2),\n\t\"trigger\":0,\n    \"TimeStep\": [\n        8,\n        10,\n        13,\n        15\n    ]\n}\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "039a03750d075f64",
+                "f4963f4a6ef55cc0"
+            ]
+        ]
+    },
+    {
+        "id": "039a03750d075f64",
+        "type": "ui_text",
+        "z": "d67214bc3552e114",
+        "group": "eea871b3c2605877",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Time",
+        "format": "{{msg.hm}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 850,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f4963f4a6ef55cc0",
+        "type": "function",
+        "z": "d67214bc3552e114",
+        "name": "Reminder Triggering",
+        "func": "let lis = msg.TimeStep;\nif (lis.includes(msg.hours) && msg.mins==15){\n    msg.trigger=1;\n}\n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "ea32dc7b4dac77f5"
+            ]
+        ]
+    },
+    {
+        "id": "ea32dc7b4dac77f5",
+        "type": "rbe",
+        "z": "d67214bc3552e114",
+        "name": "",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "trigger",
+        "topi": "topic",
+        "x": 830,
+        "y": 520,
+        "wires": [
+            [
+                "f2f3a070db8eaefd"
+            ]
+        ]
+    },
+    {
+        "id": "396715328c6fbf66",
+        "type": "ui_audio",
+        "z": "d67214bc3552e114",
+        "name": "",
+        "group": "eea871b3c2605877",
+        "voice": "Microsoft Zira Desktop - English (United States)",
+        "always": "",
+        "x": 1100,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "0273e1fbb5855d71",
+        "type": "change",
+        "z": "d67214bc3552e114",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "\"Only 5 mins remaining\"",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 700,
+        "wires": [
+            [
+                "396715328c6fbf66"
+            ]
+        ]
+    },
+    {
+        "id": "f2f3a070db8eaefd",
+        "type": "switch",
+        "z": "d67214bc3552e114",
+        "name": "Voice Over Reminder",
+        "property": "trigger",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 880,
+        "y": 620,
+        "wires": [
+            [
+                "0273e1fbb5855d71"
+            ]
+        ]
+    },
+    {
+        "id": "eea871b3c2605877",
+        "type": "ui_group",
+        "name": "Get Time Table Data",
+        "tab": "46662a6e0dd0ec5b",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "46662a6e0dd0ec5b",
+        "type": "ui_tab",
+        "name": "Get Data For your Time Table",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

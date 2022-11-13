@@ -1,0 +1,148 @@
+[
+    {
+        "id": "c99ed160852814a5",
+        "type": "tab",
+        "label": "Exercise 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "edc91c4254e1e013",
+        "type": "debug",
+        "z": "c99ed160852814a5",
+        "name": "Input values",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "fc09e7bb8cd6c6e9",
+        "type": "debug",
+        "z": "c99ed160852814a5",
+        "name": "URL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "url",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c4fee426be865526",
+        "type": "function",
+        "z": "c99ed160852814a5",
+        "name": "Create URL",
+        "func": "let lat;\nlet lng;\nlet date;\nlat = \"lat=\"+msg.payload.latitude.toString();\nlng = \"lng=\"+msg.payload.longitude.toString();\ndate = \"date=\"+msg.payload.date;\nmsg.url = \"https://api.sunrise-sunset.org/json?\"+lat+\"&\"+lng+\"&\"+date;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "fc09e7bb8cd6c6e9",
+                "a5fb80abfe2ab6e2"
+            ]
+        ]
+    },
+    {
+        "id": "f8595838e3b30e69",
+        "type": "debug",
+        "z": "c99ed160852814a5",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5fc2886004f6424c",
+        "type": "inject",
+        "z": "c99ed160852814a5",
+        "name": "Input Message",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"latitude\":6.9680607,\"longitude\":81.0332038,\"date\":\"2022-02-10\"}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 160,
+        "wires": [
+            [
+                "edc91c4254e1e013",
+                "c4fee426be865526"
+            ]
+        ]
+    },
+    {
+        "id": "a5fb80abfe2ab6e2",
+        "type": "http request",
+        "z": "c99ed160852814a5",
+        "name": "Call API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "ae2a9e1a1a7f9c0f"
+            ]
+        ]
+    },
+    {
+        "id": "ae2a9e1a1a7f9c0f",
+        "type": "function",
+        "z": "c99ed160852814a5",
+        "name": "",
+        "func": "if (msg.payload.status == \"OK\"){\n    delete msg.payload.status;\n}\n\nconst array = msg.payload.results.day_length.split(\":\"); \nlet hour = parseInt(array[0]);\nlet min = parseInt(array[1]);\nlet sec = parseInt(array[2]);\n\nif (min>=30 && sec>0){\n    hour = hour+1;\n}\n\nmsg.payload.results.day_length_rounded = hour;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "f8595838e3b30e69"
+            ]
+        ]
+    }
+]
